@@ -28,7 +28,7 @@ ADMIN_PASSWORD = 'admin@123'
 
 @app.route('/')
 def home():
-    return render_template('index.html')
+    return render_template('login.html')
 
 def allowed_file(filename):
     return '.' in filename and filename.rsplit('.', 1)[1].lower() in ALLOWED_EXTENSIONS
