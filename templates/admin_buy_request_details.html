@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Available Books</title>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css">
+</head>
+
+<body>
+    <!-- Include Navbar -->
+    {% include 'navbar.html' %}
+    <!-- ✅ Flash Messages Below Navbar -->
+    <div class="container mt-4">
+        {% with messages = get_flashed_messages(with_categories=true) %}
+        {% if messages %}
+        {% for category, message in messages %}
+        <div class="alert alert-{{ category }} alert-dismissible fade show" role="alert">
+            {{ message }}
+            <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+        </div>
+        {% endfor %}
+        {% endif %}
+        {% endwith %}
+    </div>
+
+
+    {% block content %}
+    <div class="container mt-5">
+        <h2 class="text-center">Buy Request Details</h2>
+    
+        <div class="card shadow mt-4">
+            <div class="card-body">
+                <h4 class="card-title text-center">{{ purchase.title }}</h4>
+                <p><strong>Author:</strong> {{ purchase.author }}</p>
+                <p><strong>Price:</strong> ₹{{ purchase.price }}</p>
+                <hr>
+                <h5>Buyer Details</h5>
+                <p><strong>Name:</strong> {{ purchase.buyer_name }}</p>
+                <p><strong>Email:</strong> {{ purchase.email }}</p>
+                <p><strong>Phone:</strong> {{ purchase.phone_number }}</p>
+                <hr>
+                <h5>Seller Details</h5>
+                <p><strong>Name:</strong> {{ purchase.seller_name }}</p>
+                <p><strong>Email:</strong> {{ purchase.seller_email }}</p>
+                <p><strong>Phone:</strong> {{ purchase.seller_phone }}</p>
+                <hr>
+                <h5>Purchase Info</h5>
+                <p><strong>Purchase Date:</strong> {{ purchase.purchase_date }}</p>
+    
+                <!-- Single Form to Update Both Status & Payment -->
+                <form action="{{ url_for('update_purchase', purchase_id=purchase.id) }}" method="POST">
+                    <label for="status">Update Status:</label>
+                    <select name="status" id="status" class="form-select mb-3">
+                        <option value="Pending" {% if purchase.status == 'Pending' %}selected{% endif %}>Pending</option>
+                        <option value="Completed" {% if purchase.status == 'Completed' %}selected{% endif %}>Completed</option>
+                        <option value="Cancelled" {% if purchase.status == 'Cancelled' %}selected{% endif %}>Cancelled</option>
+                    </select>
+    
+                    <label for="paid">Payment Status:</label>
+                    <select name="paid" id="paid" class="form-select mb-3">
+                        <option value="True" {% if purchase.paid %}selected{% endif %}>Paid</option>
+                        <option value="False" {% if not purchase.paid %}selected{% endif %}>Not Paid</option>
+                    </select>
+    
+                    <!-- ✅ Single Button to Update Both -->
+                    <button type="submit" class="btn btn-primary w-100">Update Purchase Details</button>
+                </form>
+            </div>
+        </div>
+    </div>
+    {% endblock %}
+    
+
+
+
+
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+</body>
+
+</html>

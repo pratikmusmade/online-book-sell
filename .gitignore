@@ -1,0 +1,46 @@
+# Ignore system files
+__pycache__/
+*.pyc
+*.pyo
+*.log
+
+# Ignore virtual environment
+venv/
+env/
+
+# Ignore database files (if using SQLite)
+*.sqlite3
+*.db
+
+# Ignore environment variables and secrets
+.env
+*.pem
+
+# Ignore compiled Python files
+*.egg-info/
+*.egg
+*.manifest
+*.spec
+
+# Ignore uploads and media
+/uploads/
+*.png
+*.jpg
+*.jpeg
+*.gif
+
+# Ignore dependency files (optional)
+pip-log.txt
+pip-delete-this-directory.txt
+
+# Ignore IDE/editor files
+.vscode/
+.idea/
+*.sublime-workspace
+
+# Ignore OS-specific files
+.DS_Store
+Thumbs.db
+
+# Ignore node_modules (if using frontend dependencies)
+node_modules/
