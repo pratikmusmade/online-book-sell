@@ -44,3 +44,4 @@ Thumbs.db
 
 # Ignore node_modules (if using frontend dependencies)
 node_modules/
+bookManagement/
